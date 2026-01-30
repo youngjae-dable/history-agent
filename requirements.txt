@@ -1,0 +1,8 @@
+# Slack
+slack-bolt>=1.18.0
+
+# Anthropic SDK
+anthropic>=0.40.0
+
+# Utilities
+python-dotenv>=1.0.0
