@@ -7,7 +7,8 @@
 ## 기능
 
 - Jira 티켓 검색 (Atlassian 공식 Rovo MCP Server)
-- GitHub PR/Issue 검색
+- GitHub PR/Issue 검색 (GitHub MCP Server)
+- Notion 페이지 검색 (선택)
 - 자연어 기반 검색
 - Slack에서 멘션으로 사용
 
@@ -43,15 +44,28 @@ GITHUB_TOKEN=ghp_your_github_token_here
 
 GitHub 토큰 생성: https://github.com/settings/tokens
 
-### 4. MCP 서버 설정 (선택 - Jira 사용 시)
+### 4. MCP 서버 설정
+
+GitHub MCP (필수)와 Atlassian MCP (선택)를 설정합니다:
 
 ```bash
-# Atlassian Rovo MCP Server 추가
+# GitHub MCP Server 추가 (npx 방식)
+claude mcp add github npx -y @modelcontextprotocol/server-github
+
+# .mcp.json에서 GITHUB_PERSONAL_ACCESS_TOKEN 설정 필요
+
+# Atlassian Rovo MCP Server 추가 (Jira 사용 시)
 claude mcp add --transport http atlassian https://mcp.atlassian.com/v1/mcp
 
 # OAuth 인증
 claude
 # /mcp 입력 → atlassian 선택 → Authenticate 클릭
+```
+
+**MCP 서버 확인**:
+```bash
+claude mcp list
+# github, atlassian 확인
 ```
 
 ### 5. 실행

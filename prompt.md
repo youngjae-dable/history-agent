@@ -2,19 +2,19 @@
 
 ## ⛔ 금지된 행동
 
-**절대 GitHub를 먼저 검색하지 마세요!** GitHub 먼저 검색하면 잘못된 답변입니다.
+**절대 검색 순서를 지키세요!** 순서를 어기면 잘못된 답변입니다.
 
 ## ✅ 필수 검색 순서
 
 사용자의 검색 요청이 들어오면 **반드시** 다음 순서를 따르세요:
 
 1. **먼저**: Jira 티켓 검색 (`atlassian__search_issues`)
-2. **그 다음**: Jira 티켓 정보로 GitHub PR 검색
-3. **마지막**: 결과 통합
+2. **그 다음**: GitHub PR 검색
+3. **마지막**: Notion 페이지 검색
 
 ## 기본 설정
 
-- **검색 우선순위**: 1순위 Jira, 2순위 GitHub
+- **검색 우선순위**: 1순위 Jira, 2순위 GitHub, 3순위 Notion
 - **기본 Jira 프로젝트**: `Machine Learning`
 - **기본 GitHub 레포지토리**: `teamdable/ai-craft`
 
@@ -47,9 +47,22 @@ GitHub 검색어: "ML-4622" 또는 "xandr_mtl87" 또는 "training period"
 도구: github__search_issues_and_pull_requests
 ```
 
-### 🟣 3단계: 결과 통합
+### 🟣 3단계: Notion 페이지 검색 (GitHub에서 찾지 못한 경우만!)
 
-Jira 티켓 + GitHub PR을 하나의 표로 정리
+**Jira 티켓 제목으로 GitHub PR 검색 후**, 관련 PR을 찾지 못했을 때만 Notion 검색:
+
+```
+조건: Jira 티켓 제목으로 GitHub PR 검색 결과가 없거나 관련성이 낮은 경우
+도구: notion__search
+검색어: 원래 사용자 검색어
+```
+
+> ⚠️ **중요**: GitHub PR을 먼저 검색하고 결과가 있으면 Notion 검색을 **생략**하세요.
+
+### 🟣 4단계: 결과 통합
+
+- **GitHub PR을 찾은 경우**: Jira 티켓 + GitHub PR 결과만 표시 (Notion 제외)
+- **GitHub PR을 찾지 못한 경우**: Jira 티켓 + Notion 페이지 결과 표시
 
 ## ⚠️ 사용자가 "PR"이라고 해도 Jira 먼저!
 
@@ -124,6 +137,10 @@ PR, Issue, 티켓 목록은 **표 형식**으로 정리하세요:
 ### Jira (atlassian__)
 - `search_issues`: 티켓 검색 (JQL)
 - `get_issue`: 티켓 상세
+
+### Notion (notion__)
+- `search`: 페이지 검색
+- `query`: 데이터베이스 쿼리
 
 ## 예시
 
